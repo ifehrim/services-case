@@ -13,20 +13,16 @@ include 'Frame/Services/Socket.php';
 include 'Frame/Services/Protocols/Http.php';
 
 
-Socket::ser("tcp://127.0.0.1:9999");
+Socket::ser("tcp://0.0.0.0:9999");
 Socket::on('start', function ($bind = null) {
     print "start:{$bind}\n";
 });
 
-Socket::on('close', function (Socket $socket) {
-    print "i'm closed fd:{$socket->_fd}\n";
+Socket::on('stat', function () {
+    print "stat:" . json_encode(Socket::$stat) . "\n";
 });
 
-Socket::on('read', function ($buf, Socket $socket) {
-    $msg="i'm a server;\n receive msg:\n" . $buf . "\n";
-    if(Http::size($buf)>0){
-        $socket->write(Http::encode($msg));
-    }
-    $socket->write($msg);
+Socket::on('read', function ($buf, Socket $soc) {
+    $soc->write("HTTP/1.1 200 OK\r\nConnection: keep-alive\r\nServer:Socket Of PHP\r\nContent-Length: 5\r\n\r\nhello");
 });
 Socket::loop();

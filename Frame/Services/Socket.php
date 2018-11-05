@@ -222,11 +222,11 @@ class Socket
         if (is_callable($call) && !empty($call)) static::on('loop', $call);
 
         static::off('start',self::$url);
-        static::$channel = @stream_socket_pair(STREAM_PF_UNIX, STREAM_SOCK_STREAM, STREAM_IPPROTO_IP);
-        if (static::$channel) {
-            stream_set_blocking(static::$channel[0], 0);
-            static::$fds['read'][0] = static::$channel[0];
-        }
+//        static::$channel = @stream_socket_pair(STREAM_PF_UNIX, STREAM_SOCK_STREAM, STREAM_IPPROTO_IP);
+//        if (static::$channel) {
+//            stream_set_blocking(static::$channel[0], 0);
+//            static::$fds['read'][0] = static::$channel[0];
+//        }
         while (true) {
 
             static::off('loop');
@@ -243,7 +243,7 @@ class Socket
                 if (is_object(self::$_mainSer)&&!is_resource(self::$_mainCli->_socket)) break;
             }
 
-            $fd = @stream_select($read, $write, $except, 0, 100000);
+            $fd = @stream_select($read, $write, $except, 0);
             if (!$fd) continue;
 
             foreach ($read as $fd) {
