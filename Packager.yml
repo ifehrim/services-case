@@ -1,0 +1,12 @@
+project:
+  name: Services
+  type: package
+  ver: 1.0.0
+  desic: Services case of packager
+  license: mit
+  namespace: Frame\Services
+  mian: Socket
+  includes: [Protocols\Frame,Protocols\Http,Protocols\Text]
+  auther:
+    name: ifehrim
+    email: ifehrim@gmail.com
