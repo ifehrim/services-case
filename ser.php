@@ -6,9 +6,11 @@
  * Time: 15:57
  */
 
+use Frame\Services\Protocols\Http;
 use Frame\Services\Socket;
 
 include 'Frame/Services/Socket.php';
+include 'Frame/Services/Protocols/Http.php';
 
 
 Socket::ser("tcp://127.0.0.1:9999");
@@ -21,6 +23,10 @@ Socket::on('close', function (Socket $socket) {
 });
 
 Socket::on('read', function ($buf, Socket $socket) {
-    $socket->write("i'm a server;\n receive msg:\n" . $buf . "\n");
+    $msg="i'm a server;\n receive msg:\n" . $buf . "\n";
+    if(Http::size($buf)>0){
+        $socket->write(Http::encode($msg));
+    }
+    $socket->write($msg);
 });
 Socket::loop();
