@@ -4,7 +4,7 @@
 
 ## What is it
 Socket is PHP framework with high performance for easily building fast, scalable network applications. Supports HTTP, SSL and other custom protocols.
-PHP 7.3 or Higher  
+PHP 7.0 or Higher  
 
 
 ## Installation
