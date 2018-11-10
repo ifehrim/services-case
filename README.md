@@ -18,7 +18,7 @@ PHP 7.0 or Higher
 
 [server ser.php](./ser.php)
 
-[client ser.php](./cli.php)
+[client cli.php](./cli.php)
 
 
 
